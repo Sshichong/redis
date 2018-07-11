@@ -4,3 +4,16 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  datasource:
+    url: jdbc:mysql://localhost:3306/sheyao1?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
