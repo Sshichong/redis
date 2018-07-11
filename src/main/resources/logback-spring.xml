@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+	scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。  当scan为true时，此属性生效。默认的时间间隔为1分钟。
+    debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+
+<configuration scan="true" scanPeriod="30 seconds">
+    <!--输出到控制台 ConsoleAppender 输出debug级别的日志-->
+    <appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
+        <!--展示格式
+        layout和encoder，都可以将事件转换为格式化后的日志记录，但是控制台输出使用layout，文件输出使用encoder
+        -->
+        <encoder>
+            <pattern>.%d{yyyy-MM-dd HH:mm:ss.SSS} %c %p - %m%n</pattern>
+        </encoder>
+        <!--如果只是想要 DEBUG 级别的日志，那么需要过滤一下，默认是 info 级别的，ThresholdFilter-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <!--打印debug级别的日志-->
+    <appender name="A2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <File>${user.dir}/logs/demo_debug.log</File>
+        <encoder>
+            <pattern>.%d{yyyy-MM-dd HH:mm:ss.SSS} %c %p - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <minIndex>1</minIndex>
+            <maxIndex>20</maxIndex>
+            <FileNamePattern>${user.dir}/logs/demo_debug.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <appender name="A3" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <File>${user.dir}/logs/demo_info.log</File>
+        <encoder>
+            <pattern>.%d{yyyy-MM-dd HH:mm:ss.SSS} %c %p - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <minIndex>1</minIndex>
+            <maxIndex>20</maxIndex>
+            <FileNamePattern>${user.dir}/logs/demo_info.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <appender name="A4" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <File>${user.dir}/logs/demo_error.log</File>
+        <encoder>
+            <pattern>.%d{yyyy-MM-dd HH:mm:ss.SSS} %c %p - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <minIndex>1</minIndex>
+            <maxIndex>20</maxIndex>
+            <FileNamePattern>${user.dir}/logs/demo_error.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+
+
+<!--root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性。
+level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。
+默认是DEBUG。可以包含零个或多个元素，标识这个appender将会添加到这个loger
+-->
+    <!--从低到高
+    TRACE < DEBUG < INFO < WARN < ERROR < FATAL
+    -->
+    <root level="INFO">
+        <appender-ref ref="A1"/>
+        <appender-ref ref="A2"/>
+        <appender-ref ref="A3"/>
+        <appender-ref ref="A4"/>
+    </root>
+</configuration>
