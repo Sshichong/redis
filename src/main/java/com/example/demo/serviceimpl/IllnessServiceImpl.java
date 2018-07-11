@@ -2,12 +2,10 @@ package com.example.demo.serviceimpl;
 
 import com.example.demo.mapper.IllnessMapper;
 import com.example.demo.model.Illness;
-import com.example.demo.service.IRedisService;
 import com.example.demo.service.IllnessService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
