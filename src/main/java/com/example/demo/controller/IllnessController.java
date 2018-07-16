@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.annotation.DemoLog;
 import com.example.demo.common.LayUiTableRep;
 import com.example.demo.common.WebApiResponse;
+import com.example.demo.constant.LogEnum;
 import com.example.demo.model.Illness;
 import com.example.demo.service.IllnessService;
 import com.example.demo.serviceimpl.RedisServiceImpl;
@@ -33,6 +35,7 @@ public class IllnessController {
      * @return
      * @throws Exception
      */
+    @DemoLog(value = "分页获取病症无封装",module = LogEnum.ILLNESS_INFO,operate = LogEnum.SELECT)
     @GetMapping(value = "/page",produces = "application/json;charset=utf-8")
     public List<Illness> findIllnessInfoPage(@RequestParam(value = "page") int pageNo,
                                              @RequestParam(value = "limit") int pageSize)throws Exception{
@@ -49,6 +52,7 @@ public class IllnessController {
      * @param pageSize
      * @return
      */
+    @DemoLog(value = "分页获取病症",module = LogEnum.ILLNESS_INFO,operate = LogEnum.SELECT)
     @GetMapping(value = "/getlist",produces = "application/json;charset=utf-8")
     public LayUiTableRep<Illness> getList(@RequestParam(value = "p")Integer pageNo,
                                           @RequestParam(value = "l")Integer pageSize
@@ -76,6 +80,7 @@ public class IllnessController {
      * @param illness
      * @return
      */
+    @DemoLog(value = "添加一个病症",module = LogEnum.ILLNESS_INFO,operate = LogEnum.SAVE)
     @PostMapping
     @ResponseBody
     public WebApiResponse<?> saveIllnessInfo(@RequestBody Illness illness){
@@ -139,6 +144,7 @@ public class IllnessController {
      * @param id
      * @return
      */
+    @DemoLog(value = "删除一个病症",module = LogEnum.ILLNESS_INFO,operate = LogEnum.DELETE)
     @DeleteMapping(value = "/{id}")
     public WebApiResponse<?> delIllnessInfo(@PathVariable("id")Integer id){
 
@@ -152,6 +158,7 @@ public class IllnessController {
     }
 
 
+    @DemoLog(value = "查询一个病症",module = LogEnum.ILLNESS_INFO,operate = LogEnum.SELECT)
     @GetMapping(value = "/selectOne",produces = "application/json;charset=utf-8")
     public Illness selectOneById(@RequestParam("illnessId")Integer illnessId){
         Illness illness =illnessService.findIllnessById(illnessId);

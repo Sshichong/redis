@@ -47,4 +47,22 @@ public class Constant {
         public static final String AUTH_EXCEPTION_MSG = "Authority exception";
         public static final String PARM_CONVERT_EXCEPTION_MSG = "Parameter conversion exception";//参数转换异常，具体错误见异常信息
     }
+
+    /**
+     * User 信息反馈数据字典
+     */
+    public static class UserDict{
+        public static final String SUCCESS_CODE ="200";
+        public static final String ERROR_CODE ="500";
+        public static final String  SUCCESS_MSG ="操作成功！";
+        public static final String SUCCESS_ADDMSG ="添加成功！";
+        public static final String SUCCESS_MODMSG ="修改成功！";
+        public static final String  SUCCESS_DELMSG ="删除成功！";
+        public static final String  SUCCESS_SELMSG ="查询成功！";
+        public static final String ERROR_MSG ="参数异常！";
+        public static final String ERROR_ADDMSG ="添加失败！";
+        public static final String ERROR_DELMSG ="删除失败！";
+        public static final String ERROR_MODMSG ="修改失败！";
+        public static final String ERROR_SELMSG ="查询失败！";
+    }
 }

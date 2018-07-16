@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.Result;
 import com.example.demo.common.WebApiResponse;
 import com.example.demo.model.User;
 import com.example.demo.serviceimpl.UserServiceImpl;
@@ -27,7 +28,7 @@ public class UserController {
     @PostMapping
     @ResponseBody
     @Transactional
-    public WebApiResponse<?> saveUserInfo(@RequestBody User user){
+    public Result<?> saveUserInfo(@RequestBody User user){
         //存入数据库
         userService.saveUserInfo(user);
 
@@ -35,6 +36,6 @@ public class UserController {
         User u= userService.findUserByName(user.getUserNickname());
         userService.put(String.valueOf(u.getUserId()),u,-1);
 
-       return WebApiResponse.success(null);
+       return Result.success(null);
     }
 }
