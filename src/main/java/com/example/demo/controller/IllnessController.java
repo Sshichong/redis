@@ -7,7 +7,6 @@ import com.example.demo.common.WebApiResponse;
 import com.example.demo.constant.LogEnum;
 import com.example.demo.model.Illness;
 import com.example.demo.service.IllnessService;
-import com.example.demo.serviceimpl.RedisServiceImpl;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -163,6 +162,13 @@ public class IllnessController {
     public Illness selectOneById(@RequestParam("illnessId")Integer illnessId){
         Illness illness =illnessService.findIllnessById(illnessId);
         return illness;
+    }
+
+
+    @DemoLog(value = "空指针异常",module = LogEnum.ILLNESS_INFO,operate = LogEnum.SELECT)
+    @GetMapping(value = "/testAfterThrowing",produces = "application/json;charset=utf-8")
+    public String testAfterThrowing(String key){
+        throw new NullPointerException();
     }
 
 

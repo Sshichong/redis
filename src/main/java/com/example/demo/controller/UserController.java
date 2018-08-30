@@ -14,7 +14,7 @@ import java.util.List;
  * Created by shichong on 2018/7/11.
  */
 @RestController
-@RequestMapping("/usr")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -37,5 +37,10 @@ public class UserController {
         userService.put(String.valueOf(u.getUserId()),u,-1);
 
        return Result.success(null);
+    }
+
+    @GetMapping
+    public String getUsers() {
+        return "Hello Spring Security";
     }
 }
